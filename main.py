@@ -11,17 +11,11 @@ sensordata = ColorSensor(Port.S1)
 motordata = Motor(Port.A)
 
 #Program része
-motordata.run(50)
+motordata.run(-150)
 
 while True:
-    szin = sensordata.color()
-    
-    if szin == "red":
+
+    if (str(sensordata.color()) == "Color.RED"):
+        print("ok")
         motordata.brake()
         ev3data.speaker.beep()
-    else:
-        while szin != "red":
-                motordata.run(50)
-                szin = sensordata.color()
-
-    
