@@ -1,26 +1,27 @@
 #!/usr/bin/env pybricks-micropython
 from pybricks.hubs import EV3Brick
-from pybricks.pupdevices import ColorSensor
-from pybricks.parameters import Port
+from pybricks.ev3devices import ColorSensor
+from pybricks.parameters import Port, Color
 from pybricks.tools import wait
 from pybricks.ev3devices import Motor
 
 
 ev3data = EV3Brick()
-sensordata = ColorSensor(Port.1)
+sensordata = ColorSensor(Port.S1)
 motordata = Motor(Port.A)
 
 #Program része
-motordata.run_forever()
+motordata.run(50)
 
 while True:
-    szin = sensor.color()
+    szin = sensordata.color()
     
-    if szin == "blue":
-        motordata.stop()
-        ev3.speaker.beep()
+    if szin == "red":
+        motordata.brake()
+        ev3data.speaker.beep()
+    else:
+        while szin != "red":
+                motordata.run(50)
+                szin = sensordata.color()
 
-    while True:
-        if szin != "blue":
-            motordata.run_forever()
     
