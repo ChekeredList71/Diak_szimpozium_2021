@@ -5,7 +5,6 @@ from pybricks.parameters import Port, Color
 from pybricks.tools import wait
 from pybricks.ev3devices import Motor
 
-
 ev3data = EV3Brick()
 sensordata = ColorSensor(Port.S1)
 motordata = Motor(Port.A)
@@ -17,5 +16,8 @@ while True:
 
     if (str(sensordata.color()) == "Color.RED"):
         print("ok")
+        wait(400)
         motordata.brake()
-        ev3data.speaker.beep()
+#        ev3data.speaker.beep()
+    if (str(sensordata.color()) != "Color.RED"):
+        motordata.run(-150)
